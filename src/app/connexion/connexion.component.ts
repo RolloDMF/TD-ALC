@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiServService } from '../api-serv.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-connexion',
@@ -8,16 +9,14 @@ import { ApiServService } from '../api-serv.service';
 })
 export class ConnexionComponent implements OnInit {
   
-  constructor(private api: ApiServService) { }
+  constructor(private api: ApiServService, private app: AppComponent) { }
   
   inscription($event){
     let user = $('#utilisateur').val();
     let psw = $('#password').val();
 
     let liste = this.api.inscription(user, psw);
-
-    console.log(liste);
-    
+    this.app.connected = false;   
   }
   
   connexion($event){
