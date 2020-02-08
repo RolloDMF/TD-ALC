@@ -1,10 +1,6 @@
 <h1>{{title}}</h1>
 
-<div *ng-if="connected"> 
-    <app-connexion></app-connexion>
-</div>
-<div *ng-if="!connected">
-    <app-list></app-list>
-</div>
+<app-connexion></app-connexion>
+<app-list *ngIf="connected"></app-list>
 
 <router-outlet></router-outlet>
