@@ -1,1 +1,32 @@
-<div id="listes"></div>
+<div class="container">
+    <ul class="list-group" *ngFor="let data of datas.todoListes">
+        <h3>{{ data.name }}</h3><button class="btn btn-danger" (click)="supprList(data.name)">X</button>
+        <li class="list-group-item" *ngFor="let elem of data.elements" ><button (click)="supprElem(elem)" class="supprElem btn btn-danger">X</button><div (click)="saveElem(elem, data.name)">{{ elem }}</div></li>
+        <button *ngIf="!nvlelem" class="btn btn-success" (click)="butNvlElem(data.name)">+</button>
+    </ul>
+    <button *ngIf="!nvlliste" id="new" class="btn btn-success" (click)="butNvlList()">Nouvelle liste</button>
+    <form *ngIf="nvlliste">
+        <div class="form-group">
+            <label for="nvlliste">Nom de la liste</label>
+            <input type="text" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" class="form-control" id="nvlliste" placeholder="Nouvelle List">
+        </div>
+        <button class="btn btn-success" (click)="createNvlList(name)">Ok</button>
+        <button class="btn btn-danger" (click)="butAn()">Annuler</button>
+    </form>
+    <form *ngIf="nvlelem" id="elemForm">
+        <div class="form-group">
+            <label for="nvlliste">Nom de l'element</label>
+            <input type="text" [(ngModel)]="elem" [ngModelOptions]="{standalone: true}" class="form-control" id="nvlliste" placeholder="Nom de l'element">
+        </div>
+        <button class="btn btn-success" (click)="createNvlElem(elem)">Ok</button>
+        <button class="btn btn-danger" (click)="butAnElem()">Annuler</button>
+    </form>
+    <form *ngIf="modifelem" id="elemModForm">
+        <div class="form-group">
+            <label for="nvlliste">Nom de l'element</label>
+            <input type="text" [(ngModel)]="elem" [ngModelOptions]="{standalone: true}" class="form-control" id="nvlliste" placeholder="Nom de l'element">
+        </div>
+        <button class="btn btn-success" (click)="modifElem(elem)">Ok</button>
+        <button class="btn btn-danger" (click)="butAnModElem()">Annuler</button>
+    </form>
+</div>

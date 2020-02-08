@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiServService } from '../api-serv.service';
-import { stringify } from 'querystring';
-import { ListComponent } from '../list/list.component';
-import { AppComponent } from '../app.component';
+import { ObjetAlc } from '../objetAlc';
 
 @Component({
   selector: 'app-connexion',
@@ -11,26 +9,24 @@ import { AppComponent } from '../app.component';
 })
 export class ConnexionComponent implements OnInit {
   
-  constructor(private api: ApiServService, private listComp: ListComponent, private app: AppComponent) { }
+  constructor(private api: ApiServService) { }
 
   ngOnInit(): void {
   }
+
+  datas: ObjetAlc;
   
   inscription($event){
-    let user = $('#utilisateur').val();
-    let psw = $('#password').val();
+    let user = $('#utilisateur').val().toString();
+    let psw = $('#password').val().toString();
 
-    this.api.inscription(user, psw).subscribe((data: Object) => {
-      this.listComp.afficheLists(data);
-    });
+    this.api.inscription(user, psw);
   }
   
   connexion($event){
-    let user = $('#utilisateur').val();
-    let psw = $('#password').val();
+    let user = $('#utilisateur').val().toString();
+    let psw = $('#password').val().toString();
 
-    this.api.connexion(user, psw).subscribe((data: Object) => {
-      this.listComp.afficheLists(data);
-    });
+    this.api.connexion(user, psw);
   }
 }

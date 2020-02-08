@@ -7,25 +7,27 @@ import { ConnexionComponent } from './connexion/connexion.component';
 import { ListComponent } from './list/list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ConnexionComponent,
-    ListComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    CommonModule
-  ],
-  providers: [
     ListComponent,
+    ConnexionComponent,
     AppComponent
   ],
-  bootstrap: [AppComponent]
+  imports: [
+    AppRoutingModule,
+    BrowserModule,
+    CommonModule,
+    HttpClientModule,
+    FormsModule
+  ],
+  providers: [
+    AppComponent,
+  ],
+  bootstrap: [
+    AppComponent,
+  ]
 })
 export class AppModule {
-  connected = true;
 }

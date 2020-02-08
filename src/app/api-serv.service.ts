@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ListComponent } from './list/list.component';
+import { ObjetAlc } from './objetAlc';
+import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiServService {
-  constructor(private http: HttpClient) { };
+  constructor(private http: HttpClient, private router: Router) { };
   url = "http://92.222.69.104/todo/";
+  datas: ObjetAlc;
 
   inscription(user, psw){
 
-    return this.http.get(this.url + "create/" + user + "/" + psw)
+    this.http.get<ObjetAlc>(this.url + "create/" + user + "/" + psw).subscribe((data: ObjetAlc) => {
+      this.datas = data;
+      this.router.navigate(["listes"]);
+    });
 
   }
 
@@ -21,16 +27,24 @@ export class ApiServService {
     .set("login", user)
     .set("password", psw);
     
-    console.log(headers);
-    
-    return this.http.get(this.url + "listes", {
+    this.http.get<ObjetAlc>(this.url + "listes", {
       headers: headers
-    })
+    }).subscribe((data: ObjetAlc) => {
+      this.datas = data;
+      this.router.navigate(["listes"]);
+    });
+
   }
 
   modification(data){
-    return this.http.post(this.url + "listes", {
-      headers: {contentType: "application/json; charset=utf-8"}
-    }, data);
+    let d = JSON.stringify(data);
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    this.http.post<ObjetAlc>(this.url + "listes", d, {
+      headers: headers
+    }).subscribe((data: ObjetAlc) => {
+      this.datas = data;
+      this.router.navigate(["listes"]);
+    });
   }
 }

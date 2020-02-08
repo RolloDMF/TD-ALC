@@ -8,5 +8,4 @@ import { Component, NgModule } from '@angular/core';
 
 export class AppComponent {
   title = 'Todo List';
-  connected = false;
 }

@@ -1,4 +1,4 @@
-export interface List {
-    name: string,
+export class List {
+    name: string;
     elements: string[]
 }
